@@ -8,9 +8,12 @@ use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController as AdminProductController;
 use App\Http\Controllers\Shop\ProductController as ShopProductController;
 use App\Http\Controllers\WishlistController;
@@ -65,14 +68,23 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
     // chekbox
     Route::patch('cart/select/{id}', [CartController::class, 'toggleSelect'])->name('cart.select');
     Route::patch('/cart/select-all', [CartController::class, 'selectAll'])->name('cart.selectAll');
-    
+
     // checkout
-    Route::post('checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+    // payment
+    Route::get('/payment', [PaymentController::class, 'index'])->name('payment.index');
+
+    // Tombol Pay (nanti dibuat)
+    // Route::post('/payment', [PaymentController::class, 'pay'])->name('payment.pay');
 
     Route::get('/wishlist', [WishlistController::class, 'index'])->name('Wishlist.index');
     Route::post('/wishlist/add/{id}', [WishlistController::class, 'wishlistAdd'])->name('wishlist.add');
     Route::delete('/wishlist/delete/{id}', [WishlistController::class, 'wishlistDelete'])->name('wishlist.delete');
 });
+//bagian footer
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/contactUs', [PageController::class, 'contactUs'])->name('contact');
+Route::get('/faq', [PageController::class, 'faq'])->name('faq');
 
 Route::middleware(['auth', 'role:admin'])
     ->prefix('admin')

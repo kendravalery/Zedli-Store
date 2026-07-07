@@ -25,33 +25,32 @@
                             <!-- Rating -->
                             <div class="flex items-center gap-1 text-xs text-yellow-500 mt-1">
                                 ⭐ 4.8 <span class="text-gray-400">({{ $wishlist->product->stock }})</span>
-                                DUMMY DULLU!!!!
-                            </div>
-                            <div class="flex items-end  gap-2">
-                                <span class="block  font-semibold text-blue-600 text-base sm:text-xl">
-                                    Rp{{ number_format($wishlist->product->price, 0, ',', '.') }}
-                                </span>
-                                <p class="text-xs ">
-                                    Terjual{{ $wishlist->product->sold ?? 0 }}x
-                                </p>
-                            </div>
+                                <- DUMMY DULLU!!!! </div>
+                                    <div class="flex items-end  gap-2">
+                                        <span class="block  font-semibold text-blue-600 text-base sm:text-xl">
+                                            Rp{{ number_format($wishlist->product->price, 0, ',', '.') }}
+                                        </span>
+                                        <p class="text-xs ">
+                                            Terjual{{ $wishlist->product->sold ?? 0 }}x
+                                        </p>
+                                    </div>
                         </a>
                         <div class="flex justify-between ">
                             <form action="{{ route('cart.add', $wishlist->product->id) }}" method="POST">
                                 @csrf
                                 <button type="submit"
-                                    class=" border bg-blue-600  px-6 py-2 rounded hover:bg-blue-700 text-white mt-2 cursor-pointer">
+                                    class=" border bg-blue-600  px-6 py-2 rounded hover:bg-blue-700 text-white mt-2 cursor-pointer rounded-xl">
                                     + Keranjang
                                 </button>
                             </form>
 
-                            <form action="{{ route('wishlist.delete', $wishlist->product->id) }}" class=""
-                                method="POST">
+                            <form action="{{ route('wishlist.delete', $wishlist->product->id) }}" method="POST"
+                                onclick="return confirm('Apakah kamu yakin ingin menghapus {{ $wishlist->product->name }}')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="cursor-pointer bg-blue-600 hover:bg-blue-700 rounded-full p-3 mt-1 cursor"><img
-                                        src="{{ asset('icon/clipart1120803.png') }}" width="16px" height="16px"
+                                    class="cursor-pointer bg-blue-600 hover:bg-blue-700 rounded-full p-3 mt-2 cursor"><img
+                                        src="{{ asset('icon/clipart1120803.png') }}" width="13px" height="13px"
                                         alt=""></button>
                             </form>
                         </div>

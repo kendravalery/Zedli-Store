@@ -7,7 +7,7 @@
         </div>
         <div class="grid md:grid-cols-2 gap-8">
             <div>
-                <div class="h-80 bg-gray-100 rounded-lg overflow-hidden">
+                <div class="h-110 bg-gray-100 rounded-lg overflow-hidden">
                     @if ($product->images->count() > 0)
                         <img id="mainImg" src="{{ asset('storage/' . $product->images->first()->path) }}"
                             class="w-full h-full object-contain bg-white">

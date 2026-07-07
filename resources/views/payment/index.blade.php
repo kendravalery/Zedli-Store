@@ -8,7 +8,7 @@
                 <div class="border-b flex gap-10 p-2 border-gray-300">
                     <div>
                         <p class="text-lg font-bold text-gray-600">
-                            alamat pengiriman :
+                           kontol:
                         </p>
                     </div>
                     <div>

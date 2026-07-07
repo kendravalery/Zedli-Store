@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
 use App\Models\CartItem;
 use App\Models\Product;
 use App\Models\User;
@@ -91,17 +92,5 @@ class CartController extends Controller
 
         return response()->json(['success' => true]);
     }
-    public function checkout()
-    {
-        $user = Auth::user();
-        $cartItems = CartItem::with('product.images')->where('user_id', $user->id)->where('is_selected', true)->get();
-
-        if ($cartItems->isEmpty()) {
-            return back()->with('error', 'pilih minimal satu produk');
-        }
-        $total = $cartItems->sum(function ($item) {
-            return $item->product->price * $item->quantity;
-        });
-        return view('checkout.index', compact('cartItems', 'total'));
-    }
+   
 }

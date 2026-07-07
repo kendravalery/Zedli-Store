@@ -1,130 +1,141 @@
 @extends('layout.layout_customer')
 
 @section('ContentCustomer')
-    <div class="max-w-5xl mx-auto px-3 md:px-0 pb-24">
+    <div class="flex flex-col lg:flex-row gap-6">
+        <div class="flex-1">
 
-        <h1 class="text-xl font-bold mb-5">Keranjang Saya</h1>
+            <div class="max-w-5xl mx-auto px-3 md:px-0 pb-24">
+                <h1 class="text-2xl font-bold mb-2"><a href="javascript:history.back()">
+                        <- </a> Keranjang Saya </h1>
 
-        <div class="mb-4">
-            <a href="javascript:history.back()" class="text-blue-500 text-sm">
-                ← Kembali
-            </a>
-        </div>
+                @if ($cartItems->isEmpty())
+                    <div class="bg-white p-6 rounded-xl shadow text-gray-500">
+                        Keranjang masih kosong 🛒
+                    </div>
+                @else
+                    {{-- SELECT ALL --}}
+                    <label class="flex items-center gap-2 mb-4 cursor-pointer">
 
-        @if ($cartItems->isEmpty())
-            <div class="bg-white p-6 rounded shadow text-gray-500">
-                Keranjang masih kosong 🛒
-            </div>
-        @else
-            {{-- SELECT ALL --}}
-            <label class="flex items-center gap-2 mb-4 cursor-pointer">
+                        <input type="checkbox" id="select-all" class="w-5 h-5 accent-blue-500 cursor-pointer">
 
-                <input type="checkbox" id="select-all" class="w-5 h-5 accent-blue-500 cursor-pointer">
+                        <span class="text-sm">Pilih semua</span>
 
-                <span class="text-sm">Pilih semua</span>
+                    </label>
 
-            </label>
+                    {{-- LIST --}}
+                    <div class="space-y-3">
 
-            {{-- LIST --}}
-            <div class="space-y-3">
+                        @foreach ($cartItems as $item)
+                            <div class="bg-white p-4 rounded-xl shadow">
 
-                @foreach ($cartItems as $item)
-                    <div class="bg-white p-4 rounded shadow">
-
-                        <div class="flex gap-3">
-
-                            {{-- CHECKBOX --}}
-                            <label class="cursor-pointer mt-1">
-
-                                <input type="checkbox" class="item-checkbox w-5 h-5 accent-blue-500 cursor-pointer mt-1"
-                                    data-id="{{ $item->id }}" data-price="{{ $item->product->price * $item->quantity }}"
-                                    {{ $item->is_selected ? 'checked' : '' }}>
-                            </label>
-
-                            {{-- CONTENT --}}
-                            <div class="flex-1">
-
-                                {{-- TOP --}}
                                 <div class="flex gap-3">
 
-                                    <img src="{{ asset('storage/' . $item->product->images->first()->path) }}"
-                                        class="w-16 h-16 object-cover rounded">
+                                    {{-- CHECKBOX --}}
+                                    <label class="cursor-pointer mt-1">
 
+                                        <input type="checkbox"
+                                            class="item-checkbox w-5 h-5 accent-blue-500 cursor-pointer mt-1"
+                                            data-id="{{ $item->id }}"
+                                            data-price="{{ $item->product->price * $item->quantity }}"
+                                            {{ $item->is_selected ? 'checked' : '' }}>
+                                    </label>
+
+                                    {{-- CONTENT --}}
                                     <div class="flex-1">
-                                        <h2 class="font-semibold text-sm md:text-base">
-                                            {{ $item->product->name }}
-                                        </h2>
 
-                                        <p class="text-xs text-gray-500">
-                                            {{ $item->quantity }} x Rp
-                                            {{ number_format($item->product->price, 0, ',', '.') }}
-                                        </p>
+                                        {{-- TOP --}}
+                                        <div class="flex gap-3">
+
+                                            <img src="{{ asset('storage/' . $item->product->images->first()->path) }}"
+                                                class="w-16 h-16 object-cover rounded">
+
+                                            <div class="flex-1">
+                                                <h2 class="font-semibold text-sm md:text-base">
+                                                    {{ $item->product->name }}
+                                                </h2>
+
+                                                <p class="text-xs text-gray-500">
+                                                    {{ $item->quantity }} x Rp
+                                                    {{ number_format($item->product->price, 0, ',', '.') }}
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                        {{-- BOTTOM --}}
+                                        <div
+                                            class="mt-3 flex flex-col md:flex-row md:justify-between md:items-center gap-2">
+
+                                            <span class="font-bold text-blue-600">
+                                                Rp {{ number_format($item->product->price * $item->quantity, 0, ',', '.') }}
+                                            </span>
+
+                                            <div class="flex items-center gap-2">
+
+                                                <form action="{{ route('cart.decrease', $item->product_id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button class="px-2 py-1 bg-gray-200 rounded">-</button>
+                                                </form>
+
+                                                <form action="{{ route('cart.increase', $item->product_id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button class="px-2 py-1 bg-gray-200 rounded">+</button>
+                                                </form>
+
+                                                <form action="{{ route('cart.remove', $item->product_id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="text-red-500 text-sm">Hapus</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
-
                                 </div>
-
-                                {{-- BOTTOM --}}
-                                <div class="mt-3 flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-
-                                    <span class="font-bold text-blue-600">
-                                        Rp {{ number_format($item->product->price * $item->quantity, 0, ',', '.') }}
-                                    </span>
-
-                                    <div class="flex items-center gap-2">
-
-                                        <form action="{{ route('cart.decrease', $item->product_id) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button class="px-2 py-1 bg-gray-200 rounded">-</button>
-                                        </form>
-
-                                        <form action="{{ route('cart.increase', $item->product_id) }}" method="POST">
-                                            @csrf
-                                            @method('PATCH')
-                                            <button class="px-2 py-1 bg-gray-200 rounded">+</button>
-                                        </form>
-
-                                        <form action="{{ route('cart.remove', $item->product_id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="text-red-500 text-sm">Hapus</button>
-                                        </form>
-
-                                    </div>
-
-                                </div>
-
                             </div>
-
-                        </div>
-
+                        @endforeach
                     </div>
-                @endforeach
+                @endif
+            </div>
+        </div>
+        <div class="lg:w-[400px]  w-full ">
+            <div class="lg:sticky lg:top-43">
+
+                <div class="p-3 bg-white rounded">
+                    <span class="text-2xl font-bold text-gray-500 "> Voucer dan promo <P></P></span>
+                    <select name="" id="" class="p-2 border my-3 rounded hover:shadow-lg border-gray-300">
+                        <option value=""></option>
+                        <option value="">lagi belum ada fitur diskon nih</option>
+                    </select>
+                    <span></span>
+                </div>
+                {{-- TOTAL --}}
+                <div class="mt-5 bg-white p-4 rounded shadow ">
+                    <div class="mb-4">
+
+                        <span class="font-bold">Total</span>
+
+                        <span id="total-price" class="font-bold text-xl text-blue-600">
+                            Rp {{ number_format($total, 0, ',', '.') }}
+                        </span>
+                    </div>
+
+
+                    {{-- DESKTOP CHECKOUT --}}
+
+                    <form action="{{ route('checkout') }}" method="POST">
+                        @csrf
+                        <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounde cursor-pointer w-full">
+                            Checkout
+                        </button>
+                    </form>
+                </div>
 
             </div>
-
-            {{-- TOTAL --}}
-            <div
-                class="mt-5 bg-white p-4 rounded shadow flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-
-                <span class="font-bold">Total</span>
-
-                <span id="total-price" class="font-bold text-xl text-blue-600">
-                    Rp {{ number_format($total, 0, ',', '.') }}
-                </span>
-
-            </div>
-
-            {{-- DESKTOP CHECKOUT --}}
-            <div class="mt-4 text-right hidden md:block">
-                <form action="{{ route('checkout') }}" method="POST">
-                    @csrf
-                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounde cursor-pointer">
-                        Checkout
-                    </button>
-                </form>
-            </div>
-
             {{-- MOBILE STICKY CHECKOUT --}}
             <div
                 class="fixed bottom-0 left-0 right-0 bg-white border-t shadow p-4 flex justify-between items-center md:hidden z-50 ">
@@ -137,7 +148,8 @@
                     </button>
                 </form>
             </div>
-        @endif
+
+        </div>
     </div>
 
     <script>
@@ -213,4 +225,5 @@
             updateSelectAll();
         });
     </script>
+
 @endsection

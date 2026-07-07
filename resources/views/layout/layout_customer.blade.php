@@ -14,7 +14,7 @@
     </script>
 </head>
 
-<body class="bg-gray-100 text-gray-800 ">
+<body class=" min-h-screen flex flex-col bg-gray-100 text-gray-800 ">
     {{-- NAVBAR --}}
     <header class="bg-white shadow-sm sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -111,11 +111,12 @@
     </header>
 
     {{-- Ini bagian Main  --}}
-    <main class="flex-1  overflow-auto">
+    <main class="flex-1  ">
         <div class="max-w-7xl mx-auto p-4 sm:p-6">
             @yield('ContentCustomer')
         </div>
     </main>
+        @include('layout.footer')
     <script>
         const accBtn = document.getElementById('accBtn');
         const accMenu = document.getElementById('accMenu');

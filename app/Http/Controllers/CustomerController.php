@@ -13,10 +13,7 @@ use Laravolt\Indonesia\Models\Village;
 
 class CustomerController extends Controller
 {
-    public function index()
-    {
-        return view('pages.Home');
-    }
+    
 
     public function showProfile()
     {

@@ -20,4 +20,7 @@ class HomeController extends Controller
         $banners = Banner::where('is_active', true)->get();
         return view('pages.Home', compact('products', 'categorys', 'banners'));
     }
+    public function about(){
+        
+    }
 }
