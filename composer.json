@@ -11,8 +11,10 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
+        "laravel/scout": "^11.3",
         "laravel/tinker": "^2.10.1",
-        "laravolt/indonesia": "^0.41.0"
+        "laravolt/indonesia": "^0.41.0",
+        "meilisearch/meilisearch-php": "^1.16"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

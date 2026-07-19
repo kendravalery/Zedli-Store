@@ -3,42 +3,9 @@
 @section('ContentCustomer')
     <div class="flex flex-col lg:flex-row gap-6">
         <div class="flex-1">
-            <h1 class="text-2xl font-bold text-gray-500">Detail Pengiriman</h1>
+            <h1 class="text-2xl font-bold text-gray-500"><a href="{{ route('checkout.back') }}"><- </a>Metode Pembayaran</h1>
             <div class="bg-white p-4 rounded-xl mb-2">
-                <div class="border-b flex gap-10 p-2 border-gray-300">
-                    <div>
-                        <p class="text-lg font-bold text-gray-600">
-                           kontol:
-                        </p>
-                    </div>
-                    <div>
-                        <button class="text-yellow-400 hover:text-yellow-500 cursor-pointer">
-                            Ganti alamat
-                        </button>
-                        {{-- pake alpine --}}
-                    </div>
-                </div>
-                {{-- tambahin pengulangan dan ada sebagai alamat utama --}}
-                <div class="flex gap-50 mb-2 p-2 border-b border-gray-300">
 
-                    <div class="text-sm">
-                        {{ optional(\Laravolt\Indonesia\Models\Village::where('code', $defaultAddress->village)->first())->name }}
-                        {{ optional(\Laravolt\Indonesia\Models\District::where('code', $defaultAddress->district)->first())->name }},
-                        {{ optional(\Laravolt\Indonesia\Models\City::where('code', $defaultAddress->city)->first())->name }},
-                        {{ optional(\Laravolt\Indonesia\Models\Province::where('code', $defaultAddress->province)->first())->name }},
-                        {{ $defaultAddress->postal_code }}
-                        {{ $defaultAddress->phone }}
-                    </div>
-
-                </div>
-
-                <label class="block text-sm  mb-2">Notes : </label>
-                <textarea name="Note" class="w-full border border-gray-300 rounded p-2" rows="3"
-                    placeholder="Catatan Untuk Penjual (opsional)"></textarea>
-                {{-- <input type="textarea" class="border border-gray-300 p-2 "> --}}
-                <p class="text-lg font-bold text-gray-600">
-                    Metode pengiriman :</p>
-                <div class="p-2 border border-gray-300">Pilih Metode</div>
                 {{-- juga pake alpine --}}
             </div>
 
@@ -53,11 +20,12 @@
                         <div class="flex gap-2">
                             <img src="{{ asset('storage/' . $item->product->images->first()->path) }}" width="80"
                                 class="rounded-lg">
+                            <div class="flex flex-col">
+                                <p class="font-medium mb-2">{{ $item->product->name }}</p>
 
-                            <p>{{ $item->product->name }}</p>
-
-                            <p>{{ $item->quantity }} x Rp {{ number_format($item->product->price, 0, ',', '.') }}</p>
-
+                                <p>{{ $item->quantity }} x Rp {{ number_format($item->product->price, 0, ',', '.') }}
+                                </p>
+                            </div>
                         </div>
 
                     </div>
@@ -103,26 +71,26 @@
                     </div>
 
 
-                    {{-- DESKTOP CHECKOUT --}}
+                    {{-- DESKTOP Pay --}}
 
-                    <form action="{{ route('payment.index') }}" method="POST">
+                    <form action="#" method="POST">
                         @csrf
                         <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded cursor-pointer w-full">
-                            continue to payment
+                            Pay
                         </button>
                     </form>
                 </div>
 
             </div>
-            {{-- MOBILE STICKY CHECKOUT --}}
+            {{-- MOBILE STICKY Pay --}}
             <div
                 class="fixed bottom-0 left-0 right-0 bg-white border-t shadow p-4 flex justify-between items-center md:hidden z-50 ">
 
                 <span id="total-price-mobile" class="font-bold text-blue-600 hover:bg-blue-700"></span>
-                <form action="{{ route('payment.index') }}" method="POST">
+                <form action="#" method="POST">
                     @csrf
                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer">
-                        continue to payment
+                        Pay
                     </button>
                 </form>
             </div>

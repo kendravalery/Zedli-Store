@@ -23,7 +23,7 @@ class RedirectIfLoggendIn
                 return redirect()->route('admim.dashboard');
             }
 
-            if ($role === 'pembeli') {
+            if ($role === 'customer') {
                 return redirect()->route('home');
             }
         }

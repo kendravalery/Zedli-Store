@@ -10,10 +10,10 @@
 </head>
 
 <body>
-<div class="flex min-h-screen items-center justify-center ">
-    <h1 class="text-red-800">Halaman Tidak Di temukan :( </h1>
-    <p> <a href="/" class="py-1 hover:underline">Kembali</a></p>
-</div>
+    <div class="flex min-h-screen items-center justify-center ">
+        <h1 class="text-red-800">Halaman Tidak Di temukan :( </h1>
+        <p> <a href="/" class="py-1 hover:underline">Kembali</a></p>
+    </div>
 </body>
 
 </html>

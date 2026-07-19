@@ -45,31 +45,34 @@
 
 
                 <div class="mt-6 flex gap-3">
-                    <form action="{{ route('wishlist.add', $product->id) }}" method="POST">
+                    <form action="{{ route('wishlist.toggle', $product->id) }}" method="POST">
                         @csrf
-                        <button type="submit" class="border   px-6 py-2 rounded hover:bg-gray-100">
-                            +  wishlist
+
+                        <button type="submit" class="border px-6 py-2 rounded hover:bg-gray-100 flex gap-2 items-center">
+
+                            <svg class="w-5 h-5 {{ $isWishlist ? 'text-red-500 fill-red-500' : 'text-gray-500 fill-none' }}"
+                                viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-width="50"
+                                    d="M512 898.56l-9.813-4.693C485.546 884.906 85.333 679.68 85.333 384c0-115.626 53.76-202.666 147.2-239.36C325.546 108.373 435.2 132.266 512 203.52c76.8-71.253 186.88-95.146 279.466-58.88C884.906 181.333 938.666 268.373 938.666 384c0 295.68-400.213 501.333-416.853 509.866z" />
+                            </svg>
+
+                            Wishlist
                         </button>
                     </form>
-                     <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
                         @csrf
                         <button type="submit" class=" border  px-6 py-2 rounded hover:bg-gray-100">
                             + Keranjang
                         </button>
                     </form>
 
-
-
-                    <button class="border px-6 py-2 rounded  bg-blue-600 hover:bg-blue-700 text-white">
+                    {{-- <button class="border px-6 py-2 rounded  bg-blue-600 hover:bg-blue-700 text-white">
                         Beli Sekarang
-                    </button>
-
+                    </button> --}}
                 </div>
 
             </div>
-
         </div>
-
     </main>
     <script>
         const desc = document.getElementById('desc');

@@ -11,6 +11,7 @@ class CheckoutController extends Controller
 {
     public function checkout()
     {
+
         $user = Auth::user();
         $defaultAddress = Address::where('user_id', $user->id)->where('is_default', true)->first();
         $addresses = Address::where('user_id', $user->id)->get();
@@ -24,8 +25,5 @@ class CheckoutController extends Controller
         });
         return view('checkout.index', compact('cartItems', 'total', 'addresses', 'defaultAddress'));
     }
-    public function continueToPayment()
-    {
-        return redirect()->route('payment.index');
-    }
+
 }

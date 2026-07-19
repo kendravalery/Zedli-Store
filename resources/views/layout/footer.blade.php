@@ -3,9 +3,9 @@
         <div class="mr-[30px]">
             <h2 class="text-2xl text-center">INFO</h2>
             <div class="font-thin ">
-                <p class="text-smp  text-center "><a href="{{ route('about') }}">about ZedliStore</a></p>
-                <p class="text-smp  text-center"><a href="">contactUs</a></p>
-                <p class="text-smp  text-center"><a href="">faq</a></p>
+                <p class="text-smp  text-center "><a href="{{ route('about') }} ">about ZedliStore</a></p>
+                <p class="text-smp  text-center"><a href="{{ route('contact.show') }}">contactUs</a></p>
+                <p class="text-smp  text-center"><a href="{{ route('faq') }}">faq</a></p>
             </div>
         </div>
         <div class="ml-[30px] flex flex-col items-center">
@@ -26,4 +26,5 @@
     </div>
 
 </footer>
-{{-- //lanjut di sini dulu baru ke card kanan itu sama checkout backend --}}
+
+{{-- LANJUT BUAT SEARCH SAMA KATEGORI , ATAU LANGSUNG API MIDTRANS ?    --}}

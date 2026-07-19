@@ -16,8 +16,10 @@ class RoleMiddleware
 
         if (Auth::user()->role->name !== $role) {
             return match (Auth::user()->role->name) {
-                'pembeli' => redirect()->route('home'),
-                'penjual' => redirect()->route('dashboard_penjual.penjual'),
+                'admin' => redirect()->route('admin.dashboard'),
+
+                'customer' => redirect()->route('home'),
+
                 default => redirect('/'),
             };
         }

@@ -12,15 +12,17 @@ class HomeController extends Controller
 {
     public function index()
     {
+        session()->forget([
+            'checkout_note',
+            'shipping',
+        ]);
         if (Auth::check() && Auth::user()->role->name === 'admin') {
             return redirect()->route('admin.dashboard');
         }
         $products = Product::latest()->withsum('orderItems as sold', 'quantity')->get();
         $categorys = Category::all();
         $banners = Banner::where('is_active', true)->get();
-        return view('pages.Home', compact('products', 'categorys', 'banners'));
+        return view('home.index', compact('products', 'categorys', 'banners'));
     }
-    public function about(){
-        
-    }
+
 }

@@ -5,12 +5,14 @@
         <div class="flex-1">
 
             <div class="max-w-5xl mx-auto px-3 md:px-0 pb-24">
+                {{--
                 <h1 class="text-2xl font-bold mb-2"><a href="javascript:history.back()">
-                        <- </a> Keranjang Saya </h1>
+                        <- </a> Keranjang Saya </h1> --}}
+                <h1 class="text-2xl font-bold mb-2"><a href="{{ route('home') }}"><- </a> Keranjang Saya </h1>
 
                 @if ($cartItems->isEmpty())
                     <div class="bg-white p-6 rounded-xl shadow text-gray-500">
-                        Keranjang masih kosong 🛒
+                        Keranjang masih kosong
                     </div>
                 @else
                     {{-- SELECT ALL --}}

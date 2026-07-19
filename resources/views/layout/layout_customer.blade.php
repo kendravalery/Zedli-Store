@@ -35,8 +35,8 @@
 
                 {{-- UNTUK SEARCH --}}
                 <div class="w-full order-3 md:order-none md:flex-1 px-1">
-                    <form action="#" class="max-w-xl mx-auto relative">
-                        <input type="search" placeholder="Cari produk"
+                    <form action="{{ route('search') }}" method="GET" class="max-w-xl mx-auto relative">
+                        <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari produk"
                             class="w-full pl-4 py-2.5 pr-20 border border-gray-200 rounded-full  focus:outline-none focus:ring-blue-300 text-sm">
                         <button type="submit"
                             class="absolute right-1 top-1/2 -translate-y-1/2 bg-blue-600 text-white px-4 py-1.5 rounded-full hover:bg-blue-700">Cari</button>
@@ -116,7 +116,7 @@
             @yield('ContentCustomer')
         </div>
     </main>
-        @include('layout.footer')
+    @include('layout.footer')
     <script>
         const accBtn = document.getElementById('accBtn');
         const accMenu = document.getElementById('accMenu');

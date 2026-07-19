@@ -12,6 +12,7 @@ class WishlistController extends Controller
     {
         $user = Auth::user();
         $wishlists = Wishlist::with('product')->where('user_id', $user->id)->with('product.images')->get();
+
         return view('wishlist.index', compact('wishlists'));
     }
     public function wishlistAdd($id)
@@ -22,6 +23,17 @@ class WishlistController extends Controller
     public function wishlistDelete($id)
     {
         Wishlist::where('user_id', Auth::id())->where('product_id', $id)->delete();
+        return back();
+    }
+    public function toggle($id)
+    {
+        $user = Auth::user();
+        $wishlist = Wishlist::where('user_id', $user->id)->where('product_id', $id)->first();
+        if ($wishlist) {
+            $wishlist->delete();
+        } else {
+            Wishlist::create(['user_id' => Auth::id(), 'product_id' => $id]);
+        }
         return back();
     }
 }

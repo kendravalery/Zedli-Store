@@ -167,7 +167,7 @@
                         <div class="flex items-center justify-between gap-3">
 
                             <!-- Price -->
-                            <span class="block mt-2 font-semibold text-blue-600 text-base sm:text-xl ">
+                            <span class="block mt-4 font-semibold text-blue-600 text-base sm:text-xl ">
                                 {{ number_format($product->price, 0, ',', '.') }}
                             </span>
                             <span class="text-xs mt-4">
