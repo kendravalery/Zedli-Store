@@ -10,8 +10,8 @@ Website e-commerce menggunakan Laravel-12, tailwind css, alpine.js
 - Wishlist
 - Cart
 - Checkout
-- address
-- 
+- address (Laravolt Indonesia)
+- search (laravel scout)
 
 ---
 
@@ -23,9 +23,6 @@ Website e-commerce menggunakan Laravel-12, tailwind css, alpine.js
 ---
 
 ## Folder Structure
-
-resources/views/customer
-→ halaman customer
 
 resources/views/admin
 → halaman admin
